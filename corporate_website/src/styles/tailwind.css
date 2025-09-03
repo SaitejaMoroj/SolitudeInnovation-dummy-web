@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --color-primary: #1e40af; /* blue-800 */
+    --color-primary-foreground: #ffffff; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #64748b; /* slate-500 */
+    --color-secondary-foreground: #ffffff; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #0ea5e9; /* sky-500 */
+    --color-accent-foreground: #ffffff; /* white */
+    
+    /* Background Colors */
+    --color-background: #ffffff; /* white */
+    --color-surface: #f8fafc; /* slate-50 */
+    
+    /* Text Colors */
+    --color-text-primary: #0f172a; /* slate-900 */
+    --color-text-secondary: #475569; /* slate-600 */
+    
+    /* Status Colors */
+    --color-success: #059669; /* emerald-600 */
+    --color-success-foreground: #ffffff; /* white */
+    --color-warning: #d97706; /* amber-600 */
+    --color-warning-foreground: #ffffff; /* white */
+    --color-error: #dc2626; /* red-600 */
+    --color-error-foreground: #ffffff; /* white */
+    
+    /* Border Colors */
+    --color-border: rgba(100, 116, 139, 0.2); /* slate-500 with 20% opacity */
+    --color-border-light: rgba(100, 116, 139, 0.1); /* slate-500 with 10% opacity */
+    
+    /* Shadow Colors */
+    --shadow-minimal: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-moderate: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-prominent: 0 10px 15px rgba(0, 0, 0, 0.1);
+    
+    /* Animation Timing */
+    --animation-fast: 200ms ease-out;
+    --animation-normal: 300ms ease-in-out;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-text-primary font-body;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Focus styles */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Navigation specific styles */
+  .nav-link {
+    @apply relative px-3 py-2 text-sm font-medium text-text-secondary transition-colors duration-200 hover:text-primary;
+  }
+  
+  .nav-link.active {
+    @apply text-primary;
+  }
+  
+  .nav-link.active::after {
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-primary content-[''];
+  }
+  
+  /* Mobile menu styles */
+  .mobile-menu-overlay {
+    @apply fixed inset-0 z-50 bg-background/95 backdrop-blur-sm;
+  }
+  
+  .mobile-menu-content {
+    @apply fixed inset-y-0 right-0 z-50 w-full max-w-sm bg-background p-6 shadow-prominent;
+  }
+  
+  /* Breadcrumb styles */
+  .breadcrumb {
+    @apply flex items-center space-x-2 text-sm text-text-secondary;
+  }
+  
+  .breadcrumb-item {
+    @apply hover:text-primary transition-colors duration-200;
+  }
+  
+  .breadcrumb-separator {
+    @apply text-text-secondary/50;
+  }
+  
+  /* Card elevation system */
+  .card-minimal {
+    @apply shadow-[var(--shadow-minimal)];
+  }
+  
+  .card-moderate {
+    @apply shadow-[var(--shadow-moderate)];
+  }
+  
+  .card-prominent {
+    @apply shadow-[var(--shadow-prominent)];
+  }
+  
+  /* Micro-interaction styles */
+  .hover-lift {
+    @apply transition-transform duration-200 ease-out hover:-translate-y-0.5;
+  }
+  
+  .hover-shadow {
+    @apply transition-shadow duration-200 ease-out hover:shadow-[var(--shadow-moderate)];
+  }
+}
+
+@layer utilities {
+  /* Custom spacing utilities */
+  .space-y-rhythm > * + * {
+    @apply mt-6;
+  }
+  
+  /* Typography utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn var(--animation-normal) forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp var(--animation-normal) forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
